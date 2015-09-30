@@ -5,11 +5,35 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="exportTable.min.js"></script>
+    <script src="../exportTable.js"></script>
 </head>
 <body>
-    <h2>Form Submissions</h2>
-    <a href="#" id="downloadID">Download as CSV</a>
+    <h2>Form Submissions 1</h2>
+    <a href="#" class="export_table" data-export="#downloadTable2">Download as CSV</a>
+<table id="downloadTable2" cellpadding="1" cellspacing="1">
+<thead>
+<tr>
+    <th>submitted</th>
+    <th>fullname</th>
+    <th>email</th>
+    <th>address</th>
+    <th>phone</th>
+    <th>company</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>09/21/2015</td>
+    <td>Shaine Turner</td>
+    <td>non.sapien.molestie@quistristique.net</td>
+    <td>P.O. Box 434, 9831 Pharetra. Road</td>
+    <td>(870) 760-7094</td>
+    <td>Felis Institute</td>
+</tr>
+</tbody>
+</table>
+    <h2>Form Submissions 2</h2>
+    <a href="#" class="export_table" data-export="#downloadTable">Download as CSV</a>
 <table id="downloadTable" cellpadding="1" cellspacing="1">
 <thead>
 <tr>
@@ -826,7 +850,8 @@
 </table>
     <script>
         exportTable.init({
-         });
+            initiator: '.export_table'
+        });
     </script>        
 </body>
 </html>
