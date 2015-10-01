@@ -19,15 +19,27 @@ var exportTable = {
 	},
 
 	data: function(selector) {
+		var returnValue = '';
+
 		var table = document.querySelector(selector);
 
+		var head = table.getElementsByTagName('thead');
+		if(head.length){
+			var headRows = head[0].children;
+		    var headCells = headRows[0].children;
+		    for(var i=0;i<headCells.length;i++){
+		    	returnValue += '"' + headCells[i].textContent + '",';
+		    }	
+		    returnValue +=  '\n';		
+		}
+
 		var body = table.getElementsByTagName('tbody')[0];
-		var rows = body.children;
-		var returnValue = '';
-		for(var i=0;i<rows.length;i++){
-		    var cells = rows[i].children;
-		    for(var j=0;j<cells.length;j++){
-		    	returnValue += '"' + cells[j].textContent + '",';
+		var bodyRows = body.children;
+		
+		for(var i=0;i<bodyRows.length;i++){
+		    var bodyCells = bodyRows[i].children;
+		    for(var j=0;j<bodyCells.length;j++){
+		    	returnValue += '"' + bodyCells[j].textContent + '",';
 		    }
 		    returnValue +=  '\n';
 		} 
