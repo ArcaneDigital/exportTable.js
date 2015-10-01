@@ -1,20 +1,26 @@
 var exportTable = {
 	init: function(options){
 		var options = options || {};
-		options.downloadID = options.downloadID || 'downloadID';
-		options.tableID = options.tableID || 'downloadTable';
 		options.format =	options.format || 'csv';
 		options.filename = options.filename || 'export.csv';
 
-		options.downloadLink = document.getElementById(options.downloadID);
-		options.downloadLink.addEventListener('click', exportTable.export, false);
+		var initiator = this.castNodeList(document.querySelectorAll(options.initiator));
+		initiator.forEach(this.bindEvent.bind(this));
 
 		exportTable.options = options;
-
 	},
 
-	data: function() {
-		var table = document.getElementById(exportTable.options.tableID);
+	castNodeList: function (list) {
+		return [].slice.call(list);
+	},
+
+	bindEvent: function (el) {
+		el.addEventListener('click', this.export, false);
+	},
+
+	data: function(selector) {
+		var table = document.querySelector(selector);
+
 		var body = table.getElementsByTagName('tbody')[0];
 		var rows = body.children;
 		var returnValue = '';
@@ -25,17 +31,16 @@ var exportTable = {
 		    }
 		    returnValue +=  '\n';
 		} 
-		
+
 		return returnValue;
 	},
 
-	export: function(){
-		data = exportTable.data();
+	export: function() {
+		data = exportTable.data(this.getAttribute('data-export'));
 		csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(data);
-		exportTable.options.downloadLink.setAttribute('download', exportTable.options.filename);
-		exportTable.options.downloadLink.setAttribute('target', '_blank');
-		exportTable.options.downloadLink.setAttribute('href', csvData);
-
+		this.setAttribute('download', exportTable.options.filename);
+		this.setAttribute('target', '_blank');
+		this.setAttribute('href', csvData);
 	},
 
 
