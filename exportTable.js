@@ -34,18 +34,18 @@ var exportTable = {
         var body = table.getElementsByTagName('tbody')[0];
         var bodyRows = body.children;
 
-        for (var i = 0; i < bodyRows.length; i++) {
-            var bodyCells = bodyRows[i].children;
-            for (var j = 0; j < bodyCells.length; j++) {
-                returnValue += '"' + bodyCells[j].textContent + '",';
+        for (var j = 0; j < bodyRows.length; j++) {
+            var bodyCells = bodyRows[j].children;
+            for (var k = 0; k < bodyCells.length; k++) {
+                returnValue += '"' + bodyCells[k].textContent + '",';
             }
             returnValue +=  '\n';
         }
     },
 
     export: function() {
-        data = exportTable.data(this.getAttribute('data-export'));
-        csvData = 'data:application/csv;charset=utf-8,';
+        var data = exportTable.data(this.getAttribute('data-export'));
+        var csvData = 'data:application/csv;charset=utf-8,';
         csvData += encodeURIComponent(data);
         this.setAttribute('download', exportTable.options.filename);
         this.setAttribute('target', '_blank');
